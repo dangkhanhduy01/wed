@@ -1,3 +1,6 @@
+
+<%@page import="model.Loai"%>
+<%@page import="java.util.ArrayList"%>
 <%-- 
     Document   : add_product
     Created on : Oct 22, 2024, 2:11:57 PM
@@ -30,6 +33,15 @@
             <label>Thể loại</label>
             <select name="maloai" class="form-control">      
                 <option value="" disabled="">==Chọn thể loại==</option>
+                <%
+                    ArrayList<Loai> dsLoai =(ArrayList<Loai>) request.getAttribute("dsLoai");
+                    for(Loai t : dsLoai)
+                    {
+                %>
+                <option value="<%=t.getMaloai() %>"> <%=t.getTenloai() %> </option>
+                <%
+                    }
+                %>
             </select>
         </div>        
         <button type="submit" class="btn btn-primary">Save</button>
