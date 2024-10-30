@@ -6,24 +6,24 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Loai"%>
-<%@page import="model.Loai"%>
 <%@page import="dao.LoaiDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%
-    LoaiDAO LoaiDAO = new LoaiDAO();
-     ArrayList<Loai> dsLoai = LoaiDAO.getAll();
-    %>
+    LoaiDAO loaiDAO = new LoaiDAO();
+    ArrayList<Loai> dsLoai = loaiDAO.getAll();
+%>
 <div class="card mb-3">
-    <h3 class="card-header">Category</h3>  
+    <h3 class="card-header">Danh Mục Sản Phẩm</h3>  
         <ul class="list-group list-group-flush">
-            <%
+                <%
                 for(Loai loai : dsLoai)
                 {
                 %>
-                <li class="list-group-item"><a class="text-decoration-none" href="product.jsp?maloai=<%=loai.getMaloai() %>">
-                        <%=loai.getTenloai() %> </a></li>
+                <li class="list-group-item"><a class="text-decoration-none" href="product.jsp?maloai=<%=loai.getMaloai() %>"><%=loai.getTenloai() %> </a></li>
+                
                 <%
                     }
-                        %>
+                %>
         </ul>   
 </div>

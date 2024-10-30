@@ -3,10 +3,10 @@
     Created on : Sep 15, 2023, 8:14:39 AM
     Author     : KHOACNTT
 --%>
-<%@page import="dao.HoaDAO"%>
 <%@page import="java.text.DecimalFormat"%>
-<%@page import="model.Hoa"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.Hoa"%>
+<%@page import="dao.HoaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!--nhung noi dung header.jsp-->
@@ -23,12 +23,12 @@
 <div class="container" id="main-content">
     <div class="row">       
         <div class="col-sm-12">
-            <div class="row">          
+            <div class="row">            
                 <%
-                    DecimalFormat fmt = new DecimalFormat("#,##0");
+                    DecimalFormat ftm = new DecimalFormat("#,##0");
                     HoaDAO hoaDAO = new HoaDAO();
                     ArrayList<Hoa> dsHoa = hoaDAO.getTop10();
-                    for (Hoa x : dsHoa) 
+                    for(Hoa x : dsHoa)
                     {
                 %>
                 <div class="col-12 col-md-6 col-lg-4">
@@ -42,7 +42,7 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col">
-                                    <p class="btn btn-danger btn-block"><%=fmt.format(x.getGia()) %>đ</p>
+                                    <p class="btn btn-danger btn-block">Add to cart</p>
                                 </div>
                                 <div class="col">
                                     <a href="#" class="btn btn-success btn-block">Add to cart</a>
