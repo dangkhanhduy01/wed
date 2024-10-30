@@ -51,7 +51,15 @@ public class Manageproduct extends HttpServlet {
  String method = request.getMethod();
         switch (action) {
             case "LIST":
-                request.setAttribute("dsHoa", hoaDAO.getAll());
+                int pageSize=5;
+                int pageIndex=1;
+                if(request.getParameter("page")!=null)
+                {
+                    pageIndex=Integer.parseInt(request.getParameter("page"));
+                }
+                int sumOfPage =(int)Math.ceil((double)hoaDAO.getAll().size()/pageSize);
+                request.setAttribute("sumOfPage",sumOfPage);
+                request.setAttribute("dsHoa",hoaDAO.getByPage(pageIndex, pageSize));              
                 request.getRequestDispatcher("admin/list_product.jsp").forward(request, response);
                 break;
             case "ADD":
