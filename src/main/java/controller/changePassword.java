@@ -36,29 +36,27 @@ public class changePassword extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // Lấy thông tin từ mật khẩu
     String oldpass = request.getParameter("oldpassword");
-    String newpass = request.getParameter("newpassword");
-    String confirmpass = request.getParameter("confirmpassword");
+        String newpass= request.getParameter("newpassword");
+        String confirmpass = request.getParameter("confirmnewpassword");
 
-    if (!newpass.equals(confirmpass)) {
-        request.setAttribute("error", "Mật khẩu mới và mật khẩu xác nhận không trùng");
-        request.getRequestDispatcher("changepass.jsp").forward(request, response);
-   
+        if (!newpass.equals(confirmpass)) {
+            request.setAttribute("error", "Mật khẩu mới và mật khẩu xác nhận không khớp với nhau, vui lòng nhập lại");
+            request.getRequestDispatcher("changepass.jsp").forward(request, response);
+        }
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        TaiKhoanDAO tkDAO = new TaiKhoanDAO();
+        TaiKhoan tk = tkDAO.checkLogin(username, oldpass);
+        if (tk != null) {
+            tk.setMatkhau(newpass);
+            tkDAO.changePassword(tk);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Mật khẩu cũ không đúng");
+            request.getRequestDispatcher("changepass.jsp").forward(request, response);
+        }
     }
-      // Kiểm tra oldpass hợp lệ?
-    HttpSession session = request.getSession();
-    String username = (String) session.getAttribute("username");
 
-    TaiKhoanDAO tkDAO = new TaiKhoanDAO();
-    TaiKhoan tk = tkDAO.checkLogin(username, oldpass); // Check valid
-    if (tk != null) { // valid
-        tk.setMatkhau(newpass);
-        tkDAO.changePassword(tk);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
-    } else {
-        request.setAttribute("error", "Mật khẩu cũ không đúng");
-        request.getRequestDispatcher("changepass.jsp").forward(request, response);
-    }
-}  
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

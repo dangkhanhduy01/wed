@@ -47,13 +47,14 @@
             <th>Action</th>
         </tr>  
         <%
+             DecimalFormat ftm = new DecimalFormat("#,##0");
             DecimalFormat fmt = new DecimalFormat("#,##0");
             ArrayList<Hoa> dsHoa = (ArrayList<Hoa>) request.getAttribute("dsHoa");
             for (Hoa x : dsHoa) {
         %>
         <tr>
             <td><%=x.getTenhoa()%></td>
-            <td><%=x.getGia()%></td>
+            <td><%=ftm.format(x.getGia())%></td>
             <td> <img src="assets/images/products/<%=x.getHinh()%>" style="width: 100px">  </td>
             <td><%=x.getMaloai()%></td>
             <td>

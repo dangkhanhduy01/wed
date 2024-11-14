@@ -40,24 +40,20 @@ public class TaiKhoanDAO {
        
     }
     // Phương thức cập nhật thông tin tài khoản (thay đổi mật khẩu)
-     public boolean changePassword(TaiKhoan tk) {
-     conn = DbContext.getConnection();
-    String sql = " update taikhoan set matkhau=? where tendangnhap=?";
-    try {
-        if (conn == null) {
-            System.out.println("Kết nối cơ sở dữ liệu không thành công");
-            return false;
+    public boolean changePassword(TaiKhoan tk) {
+       conn = DbContext.getConnection();
+        String sql = "update taikhoan set matkhau=? where tendangnhap=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, tk.getMatkhau());
+            ps.setString(2, tk.getTendangnhap());
+            int kq = ps.executeUpdate();
+            if (kq > 0) {
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Loi: " + ex.toString());
         }
-        ps.setString(1, tk.getMatkhau());
-        ps.setString(2, tk.getTendangnhap());
-        int kq = ps.executeUpdate();
-        if (kq > 0) 
-            System.out.println("Đổi mật khẩu thành công!");
-            return true;
-    } catch (Exception ex) {
-        System.out.println("Loi:" + ex.toString());
+        return false;
     }
-    return false;
-}
-
 }
