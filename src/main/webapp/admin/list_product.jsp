@@ -47,8 +47,7 @@
             <th>Action</th>
         </tr>  
         <%
-             DecimalFormat ftm = new DecimalFormat("#,##0");
-            DecimalFormat fmt = new DecimalFormat("#,##0");
+             DecimalFormat ftm = new DecimalFormat("#,##0");          
             ArrayList<Hoa> dsHoa = (ArrayList<Hoa>) request.getAttribute("dsHoa");
             for (Hoa x : dsHoa) {
         %>

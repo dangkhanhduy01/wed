@@ -23,7 +23,7 @@ public class HoaDAO {
 
     public ArrayList<Hoa> getTop10() {
         ArrayList<Hoa> ds = new ArrayList<>();
-        String sql = "select top 10 * from Hoa order by gia desc";
+        String sql = "select top 10 * from Hoa order by gia asc";//asc tăng
         conn = DbContext.getConnection();
         try {
             ps = conn.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class HoaDAO {
     //Phương thức đọc hoa theo thể loại
     public ArrayList<Hoa> getByCategoryId(int maloai) {
         ArrayList<Hoa> ds = new ArrayList<>();
-        String sql = "select * from Hoa where maloai=?";
+        String sql = "select * from Hoa where maloai=? order by gia asc ";
         conn = DbContext.getConnection();
         try {
             ps = conn.prepareStatement(sql);

@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.Hoa;
 
@@ -40,7 +41,12 @@ public class Manageproduct extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-
+        HttpSession session = request.getSession();
+        if(session.getAttribute("username")==null) //chưa đăng nhập
+        {
+        //chuyển tiếp đến trang login.jsp
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
         HoaDAO hoaDAO = new HoaDAO();
         LoaiDAO loaiDAO = new LoaiDAO();
 
