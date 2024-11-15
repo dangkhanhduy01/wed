@@ -33,8 +33,17 @@
                     int maloai = request.getParameter("maloai") == null ? 1 : Integer.parseInt(request.getParameter("maloai"));
                     HoaDAO hoaDAO = new HoaDAO();
                     ArrayList<Hoa> dsHoa = hoaDAO.getByCategoryId(maloai);
+                    if (dsHoa.isEmpty()) {   
+                    %> 
+                    <div class="col-12">
+                        <p class="text-center" >  không có sản phẩm nào </p>
+                    </div>
+                    <% 
+                    }  else {  
+
+                    }             
                     for (Hoa x : dsHoa) {
-                %>
+                %> 
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card mb-2">
                         <div class="card-header">
